@@ -1,0 +1,70 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - zsh
+  - tmux
+  - stow
+  - git
+  - fzf
+  - ninja-build
+  - gettext
+  - cmake
+  - curl
+  - wget
+  - build-essential
+  - libreadline-dev
+  - unzip
+  - ripgrep
+  - zoxide
+  - pkg-config
+  - libssl-dev
+  - g++
+  - automake
+  - autoconf
+  - libtool
+  - libtool-bin
+
+# 创建一个用户并设置 shell
+users:
+  - name: akiwu
+    shell: /usr/bin/zsh
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
+    lock_passwd: false
+    # 可选: 添加 SSH 密钥
+    # ssh_authorized_keys:
+    #  - ssh-rsa AAA...
+
+runcmd:
+  # 为所有用户安装 Zimfw
+  - su - akiwu -c "curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh"
+  - su - akiwu -c "echo 'skip_global_compinit=1' >> /home/akiwu/.zshrc"
+  
+  # 配置 zim-zoxide 模块
+  - su - akiwu -c "echo 'zmodule kiesman99/zim-zoxide' >> /home/akiwu/.zimrc"
+  - su - akiwu -c "zsh -c 'source /home/akiwu/.zshrc && zimfw install'"
+  
+  # 安装 Lua 5.1 for Neovim
+  - su - akiwu -c "curl -L -R -O http://www.lua.org/ftp/lua-5.1.5.tar.gz"
+  - su - akiwu -c "tar zxf lua-5.1.5.tar.gz"
+  - su - akiwu -c "cd lua-5.1.5 && make linux test"
+  - make -C /home/akiwu/lua-5.1.5 install
+  
+  # 安装 LuaRocks
+  - su - akiwu -c "curl -L -R -O https://luarocks.github.io/luarocks/releases/luarocks-3.9.0.tar.gz"
+  - su - akiwu -c "tar zxf luarocks-3.9.0.tar.gz"
+  - su - akiwu -c "cd luarocks-3.9.0 && ./configure"
+  - make -C /home/akiwu/luarocks-3.9.0 install
+  
+  # 安装 Neovim from source
+  - su - akiwu -c "git clone https://github.com/neovim/neovim.git"
+  - make -C /home/akiwu/neovim CMAKE_BUILD_TYPE=Release
+  - make -C /home/akiwu/neovim install
+  
+  # 初始化 zoxide
+  - su - akiwu -c 'echo "eval \"\$(zoxide init zsh)\"" >> /home/akiwu/.zshrc'
+
+  # Install rustup
+  - su - akiwu -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
+  - su - akiwu -c '. "/home/akiwu/.cargo/env" && rustup default stable'
