@@ -24,6 +24,7 @@ packages:
   - autoconf
   - libtool
   - libtool-bin
+  - gnupg2
 
 # 创建一个用户并设置 shell
 users:
@@ -44,6 +45,10 @@ runcmd:
   # 配置 zim-zoxide 模块
   - su - akiwu -c "echo 'zmodule kiesman99/zim-zoxide' >> /home/akiwu/.zimrc"
   - su - akiwu -c "zsh -c 'source /home/akiwu/.zshrc && zimfw install'"
+
+  # RVM
+  - su - akiwu -c "gpg2 --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB"
+  - su - akiwu -c "curl -sSL https://get.rvm.io | bash -s master --ruby"
   
   # 安装 Lua 5.1 for Neovim
   - su - akiwu -c "curl -L -R -O http://www.lua.org/ftp/lua-5.1.5.tar.gz"

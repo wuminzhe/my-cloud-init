@@ -9,5 +9,5 @@
 * copy init-dotfiles.sh to OrbStack:
 
   ```bash
-  cp ./init-dotfiles.sh /Users/akiwu/OrbStack/debian3/home/akiwu
+  scp ./init-dotfiles.sh akiwu@debian2@orb:/home/akiwu/
   ```
