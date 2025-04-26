@@ -71,6 +71,10 @@ runcmd:
   # 初始化 zoxide
   - su - akiwu -c 'echo "eval \"\$(zoxide init zsh)\"" >> /home/akiwu/.zshrc'
 
+  # Nodejs
+  - su - akiwu -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash "
+  - su - akiwu -c "source '/home/akiwu/.nvm/nvm.sh' && nvm install 22"
+
   # Install rustup
   - su - akiwu -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
   - su - akiwu -c '. "/home/akiwu/.cargo/env" && rustup default stable'
