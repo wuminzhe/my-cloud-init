@@ -1,6 +1,7 @@
 #cloud-config
 package_update: true
 package_upgrade: true
+
 packages:
   - zsh
   - tmux
@@ -73,3 +74,9 @@ runcmd:
   # Install rustup
   - su - akiwu -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
   - su - akiwu -c '. "/home/akiwu/.cargo/env" && rustup default stable'
+
+  # Add env variables and aliases
+  - su - akiwu -c 'echo "\n# Env variables and aliases" >> /home/akiwu/.zshrc'
+  - su - akiwu -c 'echo "export EDITOR=vi" >> /home/akiwu/.zshrc'
+  - su - akiwu -c "echo 'alias vi=nvim' >> /home/akiwu/.zshrc"
+  - su - akiwu -c 'echo "alias ll=\"ls -la\"" >> /home/akiwu/.zshrc'
