@@ -56,17 +56,21 @@ runcmd:
   - su - akiwu -c "tar zxf lua-5.1.5.tar.gz"
   - su - akiwu -c "cd lua-5.1.5 && make linux test"
   - make -C /home/akiwu/lua-5.1.5 install
+  - rm -rf /home/akiwu/lua-5.1.5* # clear
+  
   
   # 安装 LuaRocks
   - su - akiwu -c "curl -L -R -O https://luarocks.github.io/luarocks/releases/luarocks-3.9.0.tar.gz"
   - su - akiwu -c "tar zxf luarocks-3.9.0.tar.gz"
   - su - akiwu -c "cd luarocks-3.9.0 && ./configure"
   - make -C /home/akiwu/luarocks-3.9.0 install
+  - rm -rf /home/akiwu/luarocks-3.9.0* # clear
   
   # 安装 Neovim from source
   - su - akiwu -c "git clone https://github.com/neovim/neovim.git"
   - make -C /home/akiwu/neovim CMAKE_BUILD_TYPE=Release
   - make -C /home/akiwu/neovim install
+  - rm -rf /home/akiwu/neovim # clear
   
   # 初始化 zoxide
   - su - akiwu -c 'echo "eval \"\$(zoxide init zsh)\"" >> /home/akiwu/.zshrc'
