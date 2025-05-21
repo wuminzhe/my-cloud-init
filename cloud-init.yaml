@@ -83,6 +83,11 @@ runcmd:
   - su - akiwu -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
   - su - akiwu -c '. "/home/akiwu/.cargo/env" && rustup default stable'
 
+  # Install Zig
+  - su - akiwu -c "wget https://ziglang.org/download/0.14.0/zig-linux-aarch64-0.14.0.tar.xz"
+  - su - akiwu -c "tar xvf zig-linux-aarch64-0.14.0.tar.xz"
+  - su - akiwu -c 'echo "export PATH=\"$HOME/zig-linux-aarch64-0.14.0:$PATH\"" >> /home/akiwu/.zshrc'
+
   # Add env variables and aliases
   - su - akiwu -c 'echo "\n# Env variables and aliases" >> /home/akiwu/.zshrc'
   - su - akiwu -c 'echo "export EDITOR=vi" >> /home/akiwu/.zshrc'
