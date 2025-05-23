@@ -86,7 +86,7 @@ runcmd:
   # Install Zig
   - su - akiwu -c "wget https://ziglang.org/download/0.14.0/zig-linux-aarch64-0.14.0.tar.xz"
   - su - akiwu -c "tar xvf zig-linux-aarch64-0.14.0.tar.xz"
-  - su - akiwu -c 'echo "export PATH=\"$HOME/zig-linux-aarch64-0.14.0:$PATH\"" >> /home/akiwu/.zshrc'
+  - su - akiwu -c 'echo "export PATH=\"$HOME/zig-linux-aarch64-0.14.0:\$PATH\"" >> /home/akiwu/.zshrc'
 
   # Add env variables and aliases
   - su - akiwu -c 'echo "\n# Env variables and aliases" >> /home/akiwu/.zshrc'
