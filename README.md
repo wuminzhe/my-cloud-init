@@ -6,10 +6,10 @@
   infocmp -x | ssh debian@orb -- tic -x -
   ```
 
-* copy init-dotfiles.sh to OrbStack:
+* run init-dotfiles.sh:
 
   ```bash
-  scp ./init-dotfiles.sh akiwu@debian@orb:/home/akiwu/
+  ~/init-dotfiles.sh
   ```
 
 * use docker inside orbstack machine
